@@ -8,6 +8,11 @@
   height: 190px;
   width: 190px;
 }
+.scroll-height {
+  overflow: scroll;
+  overflow-x: hidden; 
+  height: 300px;
+}
 .card-main {
   box-shadow: 4px 5px rgba(23, 24, 24, 0.253);
   border-bottom-right-radius: 20px;
