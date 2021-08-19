@@ -2,17 +2,17 @@ import React from "react";
 import { category } from "../../utils/categoryPieces";
 import './PiecesAvatar.scss';
 
-export default function PiecesAvatar({ type }) {
+export default function PiecesAvatar({ typeCatergoryImage, changeInListImageAvatar }) {
 
   return (
     <div className="card-body card-main">
       <div className="container scroll">
         <div className="row">
-          {category[type].map((item) => {
+          {category[typeCatergoryImage].map((item) => {
             return (
               <div className="col">
                 <div className="card shadow-lg p-3 mb-5 bg-white image_div" style={{ width: "12rem" }}>
-                  <img className="card-img-top" src={item.default} alt={item.default} />
+                  <img className="card-img-top" src={item.default} alt={item.default} onClick={() => changeInListImageAvatar(item.default)} />
                 </div>
               </div>
             )

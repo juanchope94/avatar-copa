@@ -6,19 +6,54 @@ import './CreateAvatar.scss';
 
 
 export function CreateAvatar() {
-    const [type, setType] = React.useState("fondo");
+    const [typeCatergoryImage, setTypeCatergoryImage] = React.useState("fondo");
+    const [listTypeCategoryImage] = React.useState([
+        'fondo',
+        'cuerpo',
+        'ojos',
+        'cejas',
+        'nariz',
+        'boca',
+        'lentes',
+        'vestimenta',
+        'barba',
+        'pelo',
+        'sombrero'
+    ]);
+    const [avatar, setAvatar] = React.useState({
+        fondo: {},
+        cuerpo: {},
+        ojos: {},
+        cejas: {},
+        nariz: {},
+        boca: {},
+        lentes: {},
+        vestimenta: {},
+        barba: {},
+        pelo: {},
+        sombrero: {}
+    })
+
+    const changeInListImageAvatar = (src) => {
+        setAvatar({
+            ...avatar,
+            [typeCatergoryImage]: {
+                route: src
+            }
+        })
+    }
 
     return (
         <section >
             <div className="row">
                 <div className="col-12">
-                    <Avatar />
+                    <Avatar {...{ listTypeCategoryImage, avatar }} />
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    <NavCategory {...{ setType }} />
-                    <Pieces {...{ type }} />
+                    <NavCategory {...{ setTypeCatergoryImage }} />
+                    <Pieces {...{ typeCatergoryImage, changeInListImageAvatar }} />
                 </div>
             </div>
 
