@@ -2,9 +2,8 @@ import React from "react";
 import Avatar from "../../components/Avatar";
 import NavPiecesCategory from "../../components/NavPiecesCategory";
 import Pieces from "../../components/PiecesAvatar";
-import { db } from './../../utils/firebase-config';
+import { getAvatar, updateAvatar } from './../../api/api';
 import './CreateAvatar.scss';
-
 
 export function CreateAvatar() {
     const initialStateAvatar = {
@@ -20,9 +19,9 @@ export function CreateAvatar() {
         pelo: {},
         sombrero: {}
     }
-    const [idPersistAvatar] = React.useState('yO9RrIXOg6LJRaDqoAIU')
     const [avatar, setAvatar] = React.useState(initialStateAvatar);
     const [typeCatergoryPieces, setTypeCatergoryPieces] = React.useState("fondo");
+    const [loadAvatar, setLoadAvatar] = React.useState(false);
     const [listTypeCategoryPieces] = React.useState([
         'fondo',
         'cuerpo',
@@ -38,14 +37,16 @@ export function CreateAvatar() {
     ]);
 
     const getAvatarPersist = async () => {
-        const avatarPersist = await db.collection('avatar').doc(idPersistAvatar).get();
+        setLoadAvatar(true);
+        const avatarPersist = await getAvatar();
         setAvatar(avatarPersist.data());
+        setLoadAvatar(false);
     }
     React.useEffect(() => {
         getAvatarPersist();
     }, [])
 
-    const changeInListImageAvatar = (src) => {
+    const changePieceInAvatar = (src) => {
         setAvatar({
             ...avatar,
             [typeCatergoryPieces]: {
@@ -54,23 +55,32 @@ export function CreateAvatar() {
         })
     }
 
-    const handleAddOrEditAvatarPersist = async () => {
-        await db.collection('avatar').doc(idPersistAvatar).update(avatar);
+    const handleEditAvatarPersist = async () => {
+        setLoadAvatar(true);
+        await updateAvatar(avatar);
+        setLoadAvatar(false);
+
     }
 
     return (
         <section className="container">
             <div className="row ">
-                <div className="col-12">
-                    <div className="div-avatar" >
-                        <Avatar {...{ listTypeCategoryPieces, avatar }} />
+                <div className="col-12 d-flex justify-content-center">
+                    <div className="div-avatar border">
+                        {!loadAvatar ?
+                            <Avatar {...{ listTypeCategoryPieces, avatar }} />
+                            :
+                            <div className="load_container">
+                                <i className="loaderInto"></i>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-            <div className="row">
+            <div className="row mt-2">
                 <div className="col-12">
                     <NavPiecesCategory {...{ setTypeCatergoryPieces }} />
-                    <Pieces {...{ typeCatergoryPieces, changeInListImageAvatar, handleAddOrEditAvatarPersist }} />
+                    <Pieces {...{ typeCatergoryPieces, changePieceInAvatar, handleEditAvatarPersist }} />
                 </div>
             </div>
         </section>

@@ -1,7 +1,47 @@
 @import "~bootstrap/scss/bootstrap-grid";
 
-.div-avatar{
+.div-avatar {
     height: 350px;
     width: 350px;
     border-radius: 4mm;
+}
+
+.load_container {
+    position: relative;
+    right: 10px;
+    top: calc(45%);
+}
+.loaderInto {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+}
+
+@keyframes around {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loaderInto::after,
+.loaderInto::before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 4px solid rgb(37, 37, 240);
+    border-top: 4px solid white;
+    border-radius: 100%;
+
+    animation: around 0.7s ease-in-out infinite;
+}
+
+.loaderInto::after {
+    animation: around 0.7s ease-in-out 0.1s infinite;
+    background: transparent;
 }
