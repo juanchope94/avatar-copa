@@ -3,6 +3,7 @@ import Avatar from "../../components/Avatar";
 import NavPiecesCategory from "../../components/NavPiecesCategory";
 import Pieces from "../../components/PiecesAvatar";
 import { getAvatar, updateAvatar } from './../../api/api';
+import { toast } from 'react-toastify'
 import './CreateAvatar.scss';
 
 export function CreateAvatar() {
@@ -59,11 +60,12 @@ export function CreateAvatar() {
         setLoadAvatar(true);
         await updateAvatar(avatar);
         setLoadAvatar(false);
+        toast('Avatar actualizado!', { type: 'success', autoClose:2000 });
 
     }
 
     return (
-        <section className="container">
+        <section className="container p-2">
             <div className="row ">
                 <div className="col-12 d-flex justify-content-center">
                     <div className="div-avatar border">

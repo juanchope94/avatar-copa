@@ -1,9 +1,12 @@
-import './App.css';
+import './App.scss';
 import { CreateAvatar } from '../CreateAvatar';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
-    <div className="App bg-secondary bg-gradient">
+    <div className="App">
       <CreateAvatar />
+      <ToastContainer/>
     </div>
   );
 }

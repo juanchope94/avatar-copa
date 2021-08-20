@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap-grid";
 
 .nav-link {
-    font-size: 10px;
+    font-size: 15px;
     color: white;
     box-shadow: 4px 0px rgba(23, 24, 24, 0.253);
     margin-left: 6px;
@@ -11,5 +11,7 @@
     border-color: #00000000;
     padding: 8px 9px;
     cursor: pointer;
+    text-transform: capitalize;
+
   }
   
